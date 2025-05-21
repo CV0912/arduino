@@ -1,6 +1,6 @@
 #include <Wire.h>
 #include <math.h>
-//motor pins
+//motor pin
 const int motorfrontdir1 = 31;
 const int motorfrontspeed1 = 8;
 const int motorfrontdir2 = 29;

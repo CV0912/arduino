@@ -7,10 +7,10 @@ void setup() {
 }
 
 void loop() {
-  serv.write(90);
-  delay(500);
-   serv.write(180);
-  delay(500);
-   serv.write(0);
-  delay(500);
+
+  
+  serv.write(0);
+  delay(1000);
+  serv.write(360);
+  delay(1000);
 }

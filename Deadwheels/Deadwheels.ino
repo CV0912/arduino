@@ -66,45 +66,45 @@ float del(long current, long last) {
 //         lastTime = currentTime;
 //     }
 // }
-// void computeRobotMotion() {
-//     unsigned long currentTime = millis();
-//     float timeChange = (currentTime - lastTime) / 1000.0;  // Convert to seconds
+void computeRobotMotion() {
+    unsigned long currentTime = millis();
+    float timeChange = (currentTime - lastTime) / 1000.0;  // Convert to seconds
     
-//     // Only update if enough time has passed (avoid division by very small numbers)
-//     if (timeChange >= 0.01) {  // 10ms minimum interval
-//         // Calculate wheel displacements in mm
-//         float L_mm = calculateWheelDistance(L, lastL);
-//         float R_mm = calculateWheelDistance(R, lastR);
-//         float B_mm = calculateWheelDistance(B, lastB);
+    // Only update if enough time has passed (avoid division by very small numbers)
+    if (timeChange >= 0.01) {  // 10ms minimum interval
+        // Calculate wheel displacements in mm
+        float L_mm = calculateWheelDistance(L, lastL);
+        float R_mm = calculateWheelDistance(R, lastR);
+        float B_mm = calculateWheelDistance(B, lastB);
         
-//         // Update heading based on differential of left and right wheels
-//         float dtheta = (R_mm - L_mm) / (Ly + Ry);
-//         theta = lasttheta + dtheta;
+        // Update heading based on differential of left and right wheels
+        float dtheta = (R_mm - L_mm) / (Ly + Ry);
+        theta = lasttheta + dtheta;
         
-//         // Calculate forward and strafe components
-//         forward = (L_mm + R_mm) / 2;
-//         strafe = B_mm - Bx * dtheta;
-//         float r0 = del(forward,lastforward)/del(theta,lasttheta);
-//         float r1 = del(strafe,laststrafe)/del(theta,lasttheta);
-//         // Use average heading for this time chunk for better accuracy
-//         float avgTheta = (lasttheta + theta) / 2.0;
+        // Calculate forward and strafe components
+        forward = (L_mm + R_mm) / 2;
+        strafe = B_mm - Bx * dtheta;
+        float r0 = del(forward,lastforward)/del(theta,lasttheta);
+        float r1 = del(strafe,laststrafe)/del(theta,lasttheta);
+        // Use average heading for this time chunk for better accuracy
+        float avgTheta = (lasttheta + theta) / 2.0;
         
-//         // Update global position
-//         X = lastx + forward * cos(avgTheta) - strafe * sin(avgTheta);
-//         Y = lasty + strafe * cos(avgTheta) + forward * sin(avgTheta);
+        // Update global position
+        X = lastx + forward * cos(avgTheta) - strafe * sin(avgTheta);
+        Y = lasty + strafe * cos(avgTheta) + forward * sin(avgTheta);
         
-//         // Store current values for next iteration
-//         lastx = X;
-//         lasty = Y;
-//         lastL = L;
-//         lastR = R;
-//         lastB = B;
-//         lastforward = forward;
-//         lasttheta = theta;
-//         laststrafe = strafe;
-//         lastTime = currentTime;
-//     }
-// }
+        // Store current values for next iteration
+        lastx = X;
+        lasty = Y;
+        lastL = L;
+        lastR = R;
+        lastB = B;
+        lastforward = forward;
+        lasttheta = theta;
+        laststrafe = strafe;
+        lastTime = currentTime;
+    }
+}
 void computeRobotMotion() {
     unsigned long currentTime = millis();
     float timeChange = (currentTime - lastTime) / 1000.0;  // Convert to seconds
